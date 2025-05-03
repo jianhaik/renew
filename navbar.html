@@ -6,6 +6,7 @@
 <meta name="google" content="nositelinkssearchbox">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>dispatch page</title>
+<link rel="icon" href="./favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -439,8 +440,6 @@ ul3 button:before{
 
 
 </style>
-  <script type="module" crossorigin src="/renew/assets/navbar-fGsHyMTH.js"></script>
-  <link rel="modulepreload" crossorigin href="/renew/assets/index-dfc2d82f-DJvshMEi.js">
 </head>
 <body>
 <nav>
@@ -454,23 +453,27 @@ ul3 button:before{
       <label for="jobID" style="color:blue;">JobID:</label>
       <input type="text" id="jobID" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
       <label for="modeID" style="color:blue;">ModeID:</label>
-      <select type="text" id="modeID" style="background-color:rgb(226, 222, 10);">
+      <!-- <select type="text" id="modeID" style="background-color:rgb(226, 222, 10);">
         <option value="DL">DL</option>
         <option value="PK">PK</option>
-      </select> <br><br>
+      </select> <br><br> -->
+      <input type="text" id="modeID" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
       <label for="carrierRef" style="color:blue;">CarrierRef:</label>
       <input type="text" id="carrierRef" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
       <label for="scheduledDate" style="color:blue;">ScheduledDate:</label>
       <input type="text" id="scheduledDate" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
       <label for="btacc" style="color:blue;">BTACC:</label>
-      <select id="btacc" style="background-color:rgb(226, 222, 10);">		 
-      </select> <br><br>
+      <!-- <select id="btacc" style="background-color:rgb(226, 222, 10);">		 
+      </select> <br><br> -->
+      <input type="text" id="btacc" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
+
       <label for="serviceType" style="color:blue;">ServiceType:</label>
-      <select type="text" id="serviceType" style="background-color:rgb(226, 222, 10);">
+      <!-- <select type="text" id="serviceType" style="background-color:rgb(226, 222, 10);">
         <option type="text" value="Normal" style="background-color:rgb(226, 222, 10);">Normal</option>
         <option type="text" value="HighService" style="background-color:rgb(226, 222, 10);">HighService</option>
-      </select> <br><br>
-      
+      </select> <br><br> -->
+      <input type="text" id="serviceType" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
+
       <label for="weight" style="color:blue;">Weight:</label>
       <input type="text" id="weight" value="Mickey2" style="background-color:rgb(226, 222, 10);"><br><br>
       <label for="unit" style="color:blue;">Unit:</label>
@@ -583,6 +586,7 @@ ul3 button:before{
             <a href="#" id="oneRowEdit">Row Edit</a>
             <a href="#" id="deleteItems">Delete Items</a>
             <a href="#" id="terminate" >Terminate Items</a>
+            <a href="#" id="showPhoto" >Show Photos</a>
             <a href="#" id="createData" >Create Data</a>
             <a href="#" id="dataToFB" >Data to FB</a>
           </div>
@@ -635,7 +639,8 @@ ul3 button:before{
 </script> 
 
 
-    
+    
+<script type="module" src="./src/pages/navbar/navbarMain.tsx"  defer></script>
 
 </body>
 </html>
