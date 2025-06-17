@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+	  <meta charset="utf-8">
+    <meta name="google" value="notranslate">
+    <title>photoShow</title>
+    <script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.1/firebase-storage-compat.js"></script>
+    <link rel="stylesheet" crossorigin href="/renew/assets/showPhoto-B2-ufKkN.css">
+  </head>
+  <body>
+    <!-- <button class="navList" id="currentNo">currentNo</button> -->
+    <div id="nav" >
+        <ul class="navUl">
+            
+            <!-- <li class="navLi"><button class="navList" >1</button></li> -->
+            
+            <!-- <li class="navLi"><button class="navListC" onclick="backClick()">Back</button></li>
+            
+            <li class="navLi"><button class="navList" id="currentNo">currentNo</button></li>
+            
+            <li class="navLi"><button class="navListC" onclick="nextClick()">Next</button></li>
+             -->
+            <!-- <li class="navLi"><button class="navList" id="totalNo">totalNo</button></li> -->
+            
+            </ul>
+        
+        
+    </div>
+    
+    <div class="container" >
+      <button id="currentNo" ></button>
+      <input type="button" id="left" onclick="backClick()" value="<<">
+      <!-- <button class="direct" id="left" onclick="backClick()" value="<<" ></button> -->
+      <div id="photoList" type="text" ></div>
+      <button class="direct" id="right" onclick="nextClick()">>></button>
+    </div>
+  <!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
+  <script>
+    var photoArr = new Array();
+     var company,myDate,deliver;
+     var i2,i3
+   function  backClick() {
+     // var currentNo = document.getElementById("currentNo");
+     // var totalNo = document.getElementById("totalNo");
+     // var i2=parseInt(currentNo.innerText);
+     // var i3=parseInt(totalNo.innerText);
+     if(i2>1){
+             i2=i2-1;
+             currentNo.innerText=i2+" of "+i3;  
+             downloadPic(company,myDate,deliver,photoArr,i2-1)
+         }
+ 
+   }
+  
+   function  nextClick() {
+     // var currentNo = document.getElementById("currentNo");
+     // var totalNo = document.getElementById("totalNo");
+     // var i2=parseInt(currentNo.innerText);
+     // var i3=parseInt(totalNo.innerText);
+     if(i2<i3){
+             i2=i2+1;
+             currentNo.innerText=i2+" of "+i3;  
+             downloadPic(company,myDate,deliver,photoArr,i2-1)
+         }
+   }
+ 
+   function  downloadPic(company,myDate,deliver,photoArr,po) {
+     // Create a reference to the file we want to download
+     var storage = firebase.storage();
+ 
+     // Create a storage reference from our storage service
+     var storageRef = storage.ref();
+ 
+   //const storage = getStorage();
+   var path=company+"/"+"images"+"/"+myDate+"/"+deliver+"/"+photoArr[po]+".jpg"
+   //const storageRef = ref(storage,path);
+   console.log(storage);
+   console.log(path);
+   console.log(storageRef);
+   var starsRef = storageRef.child(path);
+ 
+  // Get the download URL
+ starsRef.getDownloadURL()
+   .then((url) => {
+     // `url` is the download URL for 'images/stars.jpg'
+     console.log(url);
+ 
+     // Or inserted into an <img> element
+     var myParent = document.getElementById('photoList');
+     var childs = myParent.childNodes;
+ 
+         for(var i = childs .length - 1; i >= 0; i--) {
+ 
+           myParent.removeChild(childs[i]);
+ 
+         }
+ 
+     var myImage = document.createElement('img');
+     myImage.src = url;
+ 
+     myParent.appendChild(myImage);
+     myImage.style.width="483px";
+     myImage.style.height="644px";
+     document.getElementById("nav").style.visibility="visible";//显示
+     
+   })
+   .catch((error) => {
+     console.log("wrong");
+ 
+   });
+ 
+ };
+   
+   function  readInfo(){
+    
+     document.getElementById("nav").style.visibility="hidden";//隐藏
+      photoArr = JSON.parse(window.sessionStorage.getItem('photoArr'));
+              myDate = window.sessionStorage.getItem('myDate');
+        deliver = window.sessionStorage.getItem('deliver');
+       var currentNo = document.getElementById("currentNo");
+       i2=1;
+       i3 = photoArr.length-1;
+         var userInfoArr=JSON.parse(window.sessionStorage.getItem('userInfo'));
+       currentNo.innerText="1"+" of "+i3;
+       
+        company=userInfoArr[1];			
+        
+        downloadPic(company,myDate,deliver,photoArr,0);
+   }
+ 
+   function firebaseInit()
+   {
+     const firebaseConfig = {
+       apiKey: "AIzaSyDYSjXVHK9N9H_sQYF9jEb1k4Nhtl-V-us",
+       authDomain: "joblist-kang.firebaseapp.com",
+       databaseURL: "https://joblist-kang.firebaseio.com",
+       projectId: "joblist-kang",
+       storageBucket: "joblist-kang.appspot.com",
+       messagingSenderId: "704002182844",
+       appId: "1:704002182844:web:636b84021295c9c629cab9",
+       measurementId: "G-W779X1QZW2"
+       };
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+     //const storage = firebase.storage();
+     firebaseAuth();
+   }
+   
+   function firebaseAuth()
+   {
+     firebase.auth().signInWithEmailAndPassword("kjhlr@hotmail.com", "671691")
+      .then(function() {
+        readInfo();
+     //window.alert("auth-ok");
+     //window.addEventListener('dataActReady', creatCsvArr());
+     //success
+     //  document.getElementById("demo").innerHTML = "ok";
+     //readInfo();
+      })
+     .catch(function() {
+     window.alert("auth-wrong");
+     // Error Handling
+       //document.getElementById("demo").innerHTML = "Wrong"; 
+     });
+   
+   }
+ 
+ </script> 
+ 
+    <script>
+     //<h1 style="margin-bottom:0;">主要的网页标题</h1>//#0003D1  #FFA500
+     window.onload = function() {
+        firebaseInit();
+        //readInfo();
+     };  
+   </script> 
+   
+  </body>
+    
+   
+
+</html>
