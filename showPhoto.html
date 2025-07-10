@@ -152,6 +152,7 @@
    
    function firebaseAuth()
    {
+    console.log("firebase=",firebase);
      firebase.auth().signInWithEmailAndPassword("kjhlr@hotmail.com", "671691")
       .then(function() {
         readInfo();
