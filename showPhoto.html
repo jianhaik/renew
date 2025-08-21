@@ -118,13 +118,13 @@
    function  readInfo(){
     
      document.getElementById("nav").style.visibility="hidden";//隐藏
-      photoArr = JSON.parse(window.localStorage.getItem('photoArr'));
-              myDate = window.localStorage.getItem('myDate');
-        deliver = window.localStorage.getItem('deliver');
+      photoArr = JSON.parse(window.sessionStorage.getItem('photoArr'));
+              myDate = window.sessionStorage.getItem('myDate');
+        deliver = window.sessionStorage.getItem('deliver');
        var currentNo = document.getElementById("currentNo");
        i2=1;
        i3 = photoArr.length-1;
-         var userInfoArr=JSON.parse(window.localStorage.getItem('userInfo'));
+         var userInfoArr=JSON.parse(window.sessionStorage.getItem('userInfo'));
        currentNo.innerText="1"+" of "+i3;
        
         company=userInfoArr[1];			
