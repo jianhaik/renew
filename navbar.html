@@ -105,6 +105,13 @@ ul1 p {
  
 }
 
+#driversPcs {
+margin-left: 35%;
+
+  width: 20px;
+	height: 20px;
+}
+
 ul2 {
     width: 32%;
     height: 100%;
@@ -430,16 +437,17 @@ ul3 button:before{
 
 #win {
   position: absolute;
- top: 5%;
+ /* top: 5%; */
  left: 35%;
-  /* width: 90%;
-  height: 90%; */
+  width: 18%;
+  height: 100%;
   background-color:skyblue ;
+  display: none;
   z-index: 110;
 }
 
 </style>
-  <script type="module" crossorigin src="/renew/assets/navbar-B3IWaVxi.js"></script>
+  <script type="module" crossorigin src="/renew/assets/navbar-avNBXRwd.js"></script>
   <link rel="modulepreload" crossorigin href="/renew/assets/index-dfc2d82f-DJvshMEi.js">
 </head>
 <body>
@@ -555,12 +563,13 @@ ul3 button:before{
       <input type="checkbox" id="switch" onclick="openSide()"/>
       <label for="switch" >Toggle</label>
       <p id="companyName">CompanyName</p>
-      </ul1>
+      <input type="radio" id="driversPcs" onclick="radioClick()">
+    </ul1>
     <ul2>
       <div class="dropdown"> 
-        <button  id="downBut" class="dropbtn">all data</button>
+        <button  id="downBut" class="dropbtn">all status</button>
         <div id="downCon" class="dropdown-content">
-          <a href="#" id="alldata" >all data</a>
+          <a href="#" id="alldata" >all status</a>
           <a href="#" id="undispatch" >undispatch</a>
           <a href="#" id="dispatched">dispatched</a>
           <a href="#" id="trouble">trouble</a>
@@ -612,11 +621,12 @@ ul3 button:before{
 <div class="content">
   <div id="mySidenav" class="sidenav"></div>
   <div id="example" class="sheet"></div>
+  <div id="win" class="cwin"></div>
 </div>
 
 
 
-<div id="win" class="cwin"></div>
+
 
 
 
@@ -625,6 +635,64 @@ ul3 button:before{
 </div>  
 
 <script>
+  var radioStatus="unchecked";
+  function radioClick(){
+	document.body.onmousedown = function (event) {
+
+		event = event || window.event;
+	
+		var target = event.target || event.srcElement;
+	
+		if (target.type === 'radio') {
+	
+			target.previousValue = target.checked;
+	
+		}
+	
+	}
+	
+	document.body.onclick = function (event) {
+	
+		event = event || window.event;
+	
+		var target = event.target || event.srcElement;
+	
+		if (target.type === 'radio') {
+	
+			if (target.previousValue) {
+				
+				target.checked = false;
+				radioStatus="unchecked";
+				document.getElementById('win').style.display='none';
+    
+			}else{
+				radioStatus="checked";
+				document.getElementById('win').style.display='block';
+        window.dispatchEvent(new Event("renderDriversLi"));
+				
+
+			}
+	
+		}
+	
+	}
+	
+	// if(document.getElementById('rad01').checked=true){
+	// 	document.getElementById('rad01').checked=false
+	// }else{
+	// 	document.getElementById('rad01').checked=true
+	// }
+}
+  
+
+  function radioAction() {
+    const myRadioButton = document.getElementById('driversPcs');
+      if(myRadioButton.previousSibling==true){
+        myRadioButton.checked = true;
+      }else{
+        myRadioButton.checked = false;
+      }
+  }
   
   function closeRowEdit() {
     document.getElementById("itemEdit").style.display="none"
